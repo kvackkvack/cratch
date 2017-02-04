@@ -1,0 +1,14 @@
+{
+  "name": "cratch",
+  "version": "0.0.1",
+  "description": "Assembly-like language that compiles to Scratch by MIT.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kvackkvack",
+  "license": "MIT",
+  "dependencies": {
+    "node-zip": "^1.1.1"
+  }
+}

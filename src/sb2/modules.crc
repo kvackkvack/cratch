@@ -1,0 +1,1 @@
+{"ping": {"depends": [], "type": "define", "name": "ping", "head": ["ping ", ["number", 1, "n"]], "script": [["repeat", ["param", "n", "r"], [["sayforsecs", "pong", 0.5]]], ["sayforsecs", "", 1], [["stack", ["ping ", ["number", 1, "n"]]], ["+", ["param", "n", "r"], 1]]]}}
