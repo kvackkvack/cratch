@@ -7,7 +7,7 @@ function Argument(value, type, name) {
   this.value = value, this.type = type, this.name = name
 }
 Argument.prototype.build = function() {
-  return [part.type, part.value, part.name]
+  return [ part.type, part.value, part.name ]
 }
 /* static */ Argument.buildParts = function(parts) {
   return parts.map(part => part instanceof Argument ? part.build() : part)

@@ -9,5 +9,6 @@ const compile = require('./compile'),
 
 // TODO: this file lol
 
-console.dir(compile(''), { depth: null })
-console.log(JSON.stringify(compile('')))
+let res = compile('')
+console.dir(res, { depth: null })
+console.log(JSON.stringify(res))

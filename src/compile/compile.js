@@ -3,7 +3,7 @@ const block = require('./block')
 const commands = {}
 
 function compile(string) {
-  let blocks = []
+  let blocks = [ ]
 
   const lines = string.split(/;\s*/g)
   lines.forEach((line) => {
