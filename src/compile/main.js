@@ -4,7 +4,10 @@
     out: optional, path to the outputted .crc file; defaults to `out.crc`
  */
 
-const compile = require('compile'),
-      args = sys.argv.slice(1)
+const compile = require('./compile'),
+      args = process.argv.slice(1)
 
 // TODO: this file lol
+
+console.dir(compile(''), { depth: null })
+console.log(JSON.stringify(compile('')))

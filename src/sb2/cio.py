@@ -92,9 +92,10 @@ def extract_script(script, sprite, mods):
         sprite.scripts.append(generate_script(
             kurt.Block('whenGreenFlag'),
             script['script'],
-            (script['pos']['x'], script['pos']['y']) if script['pos'] else (0, 0)))
+            (script['pos']['x'], script['pos']['y']) if 'pos' in script else (0, 0)))
     elif script['type'] == 'define':
         # for custom module definitions
+        print script
         news = generate_script(
             kurt.Block('procDef', kurt.CustomBlockType('stack', parse_parts(script['head']))),
             script['script'],

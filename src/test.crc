@@ -1,0 +1,1 @@
+{"flag":{"type":"main","depends":[],"script":[["doForever",[[["stack",["tick"]]],["changeVar:by:","EXE PTR",1]]]],"name":"flag"},"tick":{"type":"define","depends":[],"script":[],"name":"tick","head":["tick"]}}
