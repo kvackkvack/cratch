@@ -5,10 +5,18 @@
  */
 
 const compile = require('./compile'),
-      args = process.argv.slice(1)
+      fs = require('fs')
 
-// TODO: this file lol
+const args = process.argv.slice(2)
 
-let res = compile('')
-console.dir(res, { depth: null })
-console.log(JSON.stringify(res))
+fs.readFile(args[0], 'utf8', (err, data) => {
+  if(err) throw err
+
+  let res = compile(data)
+  console.log('OUTPUT CRC:')
+  console.dir(res, { depth: null })
+
+  fs.writeFile(args[1] || 'out.crc', JSON.stringify(res), (err) => {
+    if(err) throw err
+  })
+})
