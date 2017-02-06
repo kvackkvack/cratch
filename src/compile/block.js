@@ -39,11 +39,17 @@ const block = {
 
   // custom blocks
   custom: {
-    define(parts, ...blocks) {
+    define(opts, ...blocks) {
+      if(opts instanceof Array) {
+        opts = { parts: opts }
+      } else {
+        opts = opts instanceof Object ? opts : {}
+      }
       return new Script({
         type: 'define',
-        name: parts[0],
-        head: Argument.buildParts(parts),
+        name: opts.parts[0],
+        head: Argument.buildParts(opts.parts),
+        pos: opts.pos
       }, ...blocks)
     },
     call(parts, ...arguments) {
@@ -69,17 +75,17 @@ const block = {
   },
 
   repeatn(count, body) {
-    return ['doRepeat', count, body instanceof Array ? body : [body]]
+    return ['doRepeat', count, body]
   },
   repeatcond(condition, body) {
-    return ['doUntil', condition, body instanceof Array ? body : [body]]
+    return ['doUntil', condition, body]
   },
 
   ifthen(condition, body) {
-    return ['doIf', condition, body instanceof Array ? body : [body]]
+    return ['doIf', condition, body]
   },
   ifelse(condition, body1, body2) {
-    return ['doIfElse', condition, body1 instanceof Array ? body1 : [body1], body2 instanceof Array ? body2 : [body2]]
+    return ['doIfElse', condition, body1, body2]
   },
 
   stop(what) {

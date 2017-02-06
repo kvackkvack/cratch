@@ -1,1 +1,1 @@
-{"flag":{"type":"main","depends":[],"script":[["doForever",[[["stack",["tick"]]],["changeVar:by:","EXE PTR",1]]]],"name":"flag"},"tick":{"type":"define","depends":[],"script":[],"name":"tick","head":["tick"]}}
+{"flag":{"type":"main","depends":[],"script":[["setVar:to:","EXE PTR",0],["deleteLine:ofList:","all","data"],["deleteLine:ofList:","all","return stack"],["doForever",[[["stack",["tick"]]],["changeVar:by:","EXE PTR",1]]]],"name":"flag"},"tick":{"type":"define","depends":[],"script":[],"name":"tick","head":["tick"]}}

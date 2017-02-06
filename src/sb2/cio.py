@@ -133,3 +133,18 @@ def extract_scripts(scripts, sprite, mods):
     # Extract all scripts of a `build_scripts` dictionary into a certain sprite
     for key in scripts:
         extract_script(scripts[key], sprite, mods)
+
+def extract_vars(varis, lists, sprite):
+    # Extract all variables and lists into a certain Kurt sprite
+    for var in varis:
+        sprite.variables[var] = kurt.Variable()
+    for slist in lists:
+        sprite.lists[slist] = kurt.List()
+
+def build_vars(varis, lists):
+    out = { 'vars': [], 'lists': [] }
+    for var in varis.iterkeys():
+        out.vars.append('var')
+    for slist in lists.iterkeys():
+        out.lists.append('slist')
+    return out

@@ -1,16 +1,16 @@
 # Called by main.py. I swear it was a good idea to seperate this into two files at some point.
 
 from kurt import kurt
-from cio import extract_scripts
+from cio import extract_scripts, extract_vars
 import json, os
 
 def compile(main):
     proj = make_project()
     sprite = proj.sprites[0]
-    print main
     main = json.loads(main)
 
-    extract_scripts(main, sprite, get_modules())
+    extract_scripts(main['scripts'], sprite, get_modules())
+    extract_vars(main['vars'], main['lists'], sprite)
 
     return proj
 
