@@ -4,10 +4,10 @@ const block = require('./block')
 function compile(string) {
   let blocks = [ ]
 
-  const lines = string.split(/;\s*/g)
+  const lines = string.split(/[\n\r]+/g)
   lines.forEach((line) => {
     if(line == '') return
-    const parts = line.split(/\sy+/g)
+    const parts = line.split(/\s+/g)
     blocks.push(commands[parts[0]](parts[1]))
   })
 

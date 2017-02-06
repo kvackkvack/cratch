@@ -1,2 +1,2 @@
-MSTR "Hello, world!";
-PRNT;
+sstr "Hello, world!"
+sstr.print
