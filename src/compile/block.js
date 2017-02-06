@@ -150,22 +150,24 @@ const block = {
 
   // list
   list: {
-    add(item, list) {
+    LAST: 'last', RANDOM: 'random', ALL: 'all',
+
+    add(list, item) {
       return ['append:toList:', item, list]
     },
-    remove(item, list) {
+    remove(list, item) {
       return ['deleteLine:ofList:', item, list]
     },
 
-    insert(item, index, list) {
+    insert(list, item, index) {
       return ['insert:at:ofList:', item, index, list]
     },
-    replace(index, list, item) {
+    replace(list, item, index) {
       return ['setLine:ofList:to:', index, list, item]
     },
 
-    get(name) {
-      return ['contentsOfList:', name]
+    get(list) {
+      return ['contentsOfList:', list]
     },
     show(list) {
       return ['showList:', list]
@@ -174,7 +176,7 @@ const block = {
       return ['hideList:', list]
     },
 
-    item(n, list) {
+    item(list, n) {
       return ['getLine:ofList:', n, list]
     },
     length(list) {

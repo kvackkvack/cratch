@@ -1,6 +1,5 @@
 const block = require('./block')
-
-const commands = {}
+      commands = require('./commands')
 
 function compile(string) {
   let blocks = [ ]
@@ -15,6 +14,9 @@ function compile(string) {
   let scripts = {}
 
   Object.assign(scripts, block.greenflag(
+    block.variable.set('EXE PTR', 0),
+    block.list.remove('data', block.list.ALL),
+    block.list.remove('return stack', block.list.ALL),
     block.forever([
       block.custom.call(['tick']),
       block.variable.change('EXE PTR', 1)
