@@ -19,6 +19,6 @@ Look inside the files mentioned for further documentation on how to call them.
 ### shut up; I just want something that works
 Ok.  
 `node compile/main.js <myfile.crs> && python sb2/main.py out.crc <outpath.sb2>`
-Obviously, replace `<myfile.crs>` and `<outpath.sb2>` by the relevant files. You should then be able to open `outpath.sb2`; just click the green flag and it should do the rest. :tada:
+Obviously, replace `<myfile.crs>` and `<outpath.sb2>` with the relevant files. You should then be able to open `outpath.sb2`; just click the green flag and the program should do the rest. :tada:
 
 _written by @kvackkvack for no real reason_
