@@ -95,7 +95,6 @@ def extract_script(script, sprite, mods):
             (script['pos']['x'], script['pos']['y']) if 'pos' in script else (0, 0)))
     elif script['type'] == 'define':
         # for custom module definitions
-        print script
         news = generate_script(
             kurt.Block('procDef', kurt.CustomBlockType('stack', parse_parts(script['head']))),
             script['script'],
@@ -144,7 +143,7 @@ def extract_vars(varis, lists, sprite):
 def build_vars(varis, lists):
     out = { 'vars': [], 'lists': [] }
     for var in varis.iterkeys():
-        out.vars.append('var')
+        out['vars'].append('var')
     for slist in lists.iterkeys():
-        out.lists.append('slist')
+        out['lists'].append('slist')
     return out

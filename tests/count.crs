@@ -1,0 +1,10 @@
+mem  01
+snum 00
+putr 00
+loop:
+  snum.print
+  get  00
+  snum 01
+  snum.add
+  putr 00
+  jmpl loop
