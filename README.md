@@ -14,7 +14,7 @@ Ok.
 Obviously, replace `<myfile.crs>` and `<outpath.sb2>` with the relevant files. You should then be able to open `outpath.sb2`; just click the green flag and the program should do the rest. :tada:
 
 ### I want a more thorough explanation  
-Great!  
+Great!  
 Take a look at [the wiki article](../../wiki/Build). Create an issue or contact me otherwise if you need further clarification.
 
 _written by @kvackkvack for no real reason_
