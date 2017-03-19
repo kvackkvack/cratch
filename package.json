@@ -9,6 +9,7 @@
   "author": "kvackkvack",
   "license": "MIT",
   "dependencies": {
-    "node-zip": "^1.1.1"
+    "node-zip": "^1.1.1",
+    "nearley": "^2.8.0"
   }
 }

@@ -21,6 +21,15 @@ commands = {
     block.list.add('log', block.list.item('returns', block.list.LAST)),
     block.list.remove('returns', block.list.LAST)
   ],
+  'sstr.join': () => [
+    block.custom.call([ 'Tsstr_join' ])
+  ],
+  'sstr.len': () => [
+    block.list.add('returns', block.length( block.list.item('returns', block.list.LAST) ))
+  ],
+  'sstr.char': () => [
+    block.list.add('returns', block.letterof(  ))
+  ],
 
   // snum
   'snum': (val) => [

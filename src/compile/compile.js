@@ -1,57 +1,48 @@
 const block = require('./block')
       commands = require('./commands')
 
-function compile(string) {
+const nearley = require('nearley'),
+      grammar = require('../parse/grammar')
+
+function compile(code) {
   let blocks = [ ], labels = { },
       depends = [ ],
       instruction = 0
 
-  const lines = string.split(/[\n\r]+/g)
-  lines.forEach((line, i) => {
-    try {
-      if(line == '' || line[0] == '#') return
+  console.log(grammar.ParserStart)
+  let parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
 
-      function Label(x) { this.x = x } // bad OOP
+  try {
+    code = code.replace(/[\r\n]+/g, '\n')
+    parser.feed(code)
+  } catch(e) {
+    console.log('error')
+    throw e // TODO: show more info here
+  }
 
-      let matchnum = '([\\+\\-]?\\d+(\\.\\d*)?)'
-      function parsenum(num, radix = 10) {
-        if(radix != 10) {
-          if(num.indexOf('.') > -1) throw 'Numbers not in base 10 may not be floating point.'
-          return Number.parseInt(num, radix)
-        } else {
-          return Number.parseFloat(num)
-        }
-      }
-
-      const parts = splitIntoItems(line.trimLeft(), {
-        '([^\s:]+):': a => new Label(a[1]), // labels
-
-        '(["\'`])(.*?[^\\\\])\\1': a => a[2], // strings
-        [matchnum]: a => parsenum(a[1], 10), // decimal nums
-        ['0x'+matchnum]: a => parsenum(a[1], 16), // hex nums
-        ['0b'+matchnum]: a => parsenum(a[1], 2), // binary nums
-        [matchnum+':(\\d+)']: a => parsenum(a[1], a[3]), // nums in any base (e.g 120:3 is 120 in base 3)
-        '[^\\s:]+': a => a[0] // plain values
-      })
-
-      let labelparts = parts.filter(part => part instanceof Label)
-      if(labelparts.length > 0) {
-        if(parts.length > 1) throw `Non-label statement cannot include label (label: ${labelparts[0]})`
-        labels[labelparts[0].x] = instruction
+  if(parser.results.length > 1)
+    throw 'Ambigious grammar'
+  let res = parser.results[0]
+  if(res[0] != 'program')
+    throw 'Something\'s really wrong here...'
+  res = res[1]
+  if(res) {
+    console.dir(res, { depth: null })
+    res.forEach((instr, i) => {
+      if(instr[0] == 'label') {
+        labels[instr[1][1]] = i
+        console.log(labels)
       } else {
-        let result = commands[parts[0]](parts[1], labels, instruction)
-        blocks.push(result)
-        result.forEach((block) => {
+        let cmd = commands[instr[1][1]](instr[2] ? instr[2][1] : null, labels)
+        blocks.push(cmd)
+        cmd.forEach((block) => {
           if(block[0] instanceof Array) {
             depends.push(block[0][1][0])
           }
         })
-        instruction += 1
       }
-    } catch(e) {
-      throw `${e} on line ${i+1}.`
-    }
-  })
+    })
+  }
 
   let scripts = {}
 
