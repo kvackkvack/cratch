@@ -13,8 +13,6 @@ fs.readFile(args[0], 'utf8', (err, data) => {
   if(err) throw err
 
   let res = compile(data)
-  console.log('OUTPUT CRC:')
-  console.dir(res, { depth: null })
 
   fs.writeFile(args[1] || 'out.crc', JSON.stringify(res), (err) => {
     if(err) throw err
