@@ -73,6 +73,34 @@ commands = {
     block.custom.call([ 'Tsnum_eq' ])
   ],
 
+
+  // bool
+
+  'bool': (val) => [
+    block.list.add('returns', val === 'false' ? '0' : new Number(!!val).toString())
+  ],
+  'bool.print': () => [
+    ...pop('returns', 'R1'),
+    block.ifelse(
+      block.equal( block.variable.get('R1'), '1' ),
+      [ block.list.add('log', 'true')  ],
+      [ block.list.add('log', 'false') ]
+    )
+  ],
+  'bool.not': () => [
+    ...pop('returns', 'R1'),
+    block.list.add('returns', block.not(block.variable.get('R1')))
+  ],
+  'bool.and': () => [
+    block.custom.call([ 'Tbool_and' ])
+  ],
+  'bool.or': () => [
+    block.custom.call([ 'Tbool_or' ])
+  ],
+  'bool.xor': () => [
+    block.custom.call([ 'Tbool_xor' ])
+  ],
+
   // memory
   'mem': (n) => [ // add n pieces of memory
     block.repeatn(

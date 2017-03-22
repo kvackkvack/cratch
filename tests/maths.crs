@@ -31,11 +31,11 @@ sstr.print
 snum 11
 snum 10
 snum.gt
-sstr.print # no boolean type implemented yet
+bool.print
 
 sstr "5 = 8?"
 sstr.print
 snum 5
 snum 8
 snum.eq
-sstr.print # no boolean type implemented yet
+bool.print

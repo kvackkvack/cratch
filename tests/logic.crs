@@ -1,0 +1,33 @@
+sstr "true AND false = "
+sstr.print
+bool true
+bool false
+bool.and
+bool.print
+
+sstr "true OR false = "
+sstr.print
+bool true
+bool false
+bool.or
+bool.print
+
+sstr "true XOR false = "
+sstr.print
+bool true
+bool false
+bool.xor
+bool.print
+
+sstr "true XOR true = "
+sstr.print
+bool true
+bool true
+bool.xor
+bool.print
+
+sstr "NOT true = "
+sstr.print
+bool true
+bool.not
+bool.print
