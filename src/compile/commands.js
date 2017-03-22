@@ -11,6 +11,13 @@
 
 const block = require('./block')
 
+function pop(list, tovar) {
+  return [
+    block.variable.set(tovar, block.list.item(list, block.list.LAST)),
+    block.list.remove(list, block.list.LAST)
+  ]
+}
+
 let commands = {}
 commands = {
   // sstr
@@ -21,15 +28,18 @@ commands = {
     block.list.add('log', block.list.item('returns', block.list.LAST)),
     block.list.remove('returns', block.list.LAST)
   ],
+
   'sstr.join': () => [
     block.custom.call([ 'Tsstr_join' ])
   ],
   'sstr.len': () => [
-    block.list.add('returns', block.length( block.list.item('returns', block.list.LAST) ))
+    ...pop('returns', 'R1'),
+    block.list.add('returns', block.length( block.variable.get('R1') ))
   ],
   'sstr.char': () => [
-    block.list.add('returns', block.letterof(  ))
+    block.custom.call([ 'Tsstr_char' ])
   ],
+
 
   // snum
   'snum': (val) => [
@@ -39,8 +49,28 @@ commands = {
     block.list.add('log', block.list.item('returns', block.list.LAST)),
     block.list.remove('returns', block.list.LAST)
   ],
+
   'snum.add': () => [
     block.custom.call([ 'Tsnum_add' ])
+  ],
+  'snum.sub': () => [
+    block.custom.call([ 'Tsnum_sub' ])
+  ],
+  'snum.mul': () => [
+    block.custom.call([ 'Tsnum_mul' ])
+  ],
+  'snum.div': () => [
+    block.custom.call([ 'Tsnum_div' ])
+  ],
+
+  'snum.gt': () => [
+    block.custom.call([ 'Tsnum_gt' ])
+  ],
+  'snum.lt': () => [
+    block.custom.call([ 'Tsnum_lt' ])
+  ],
+  'snum.eq': () => [
+    block.custom.call([ 'Tsnum_eq' ])
   ],
 
   // memory
@@ -49,6 +79,7 @@ commands = {
       n, [ block.list.add('data', '') ]
     )
   ],
+
   'put': (idx) => [ // write the last return to a memory location
     block.list.replace('data', block.list.item('returns', block.list.LAST), idx + 1),
     block.list.remove('returns', block.list.LAST)
@@ -59,6 +90,7 @@ commands = {
   'get': (idx) => [
     block.list.add('returns', block.list.item('data', idx + 1))
   ],
+
 
   // jumps
   'jmpl': (label, labels) => [

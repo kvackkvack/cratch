@@ -1,0 +1,41 @@
+sstr "10 + 5 = "
+sstr.print
+snum 10
+snum 5
+snum.add
+snum.print
+
+sstr "15 - 10 = "
+sstr.print
+snum 15
+snum 10
+snum.sub
+snum.print
+
+sstr "4 * 4 = "
+sstr.print
+snum 4
+snum 4
+snum.mul
+snum.print
+
+sstr "100 / 10 = "
+sstr.print
+snum 100
+snum 10
+snum.div
+snum.print
+
+sstr "11 > 10?"
+sstr.print
+snum 11
+snum 10
+snum.gt
+sstr.print # no boolean type implemented yet
+
+sstr "5 = 8?"
+sstr.print
+snum 5
+snum 8
+snum.eq
+sstr.print # no boolean type implemented yet

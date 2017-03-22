@@ -9,7 +9,6 @@ function compile(code) {
       depends = [ ],
       instruction = 0
 
-  console.log(grammar.ParserStart)
   let parser = new nearley.Parser(grammar.ParserRules, grammar.ParserStart)
 
   try {
