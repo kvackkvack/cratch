@@ -30,11 +30,9 @@ function compile(code) {
     throw 'Something\'s really wrong here...'
   res = res[1]
   if(res) {
-    console.dir(res, { depth: null })
     res.forEach((instr, i) => {
       if(instr[0] == 'label') {
         labels[instr[1][1]] = i
-        console.log(labels)
       } else {
         let cmd = commands[instr[1][1]](instr[2] ? instr[2][1] : null, labels)
         blocks.push(cmd)
