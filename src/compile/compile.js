@@ -25,9 +25,10 @@ function compile(code) {
     throw 'Ambigious grammar'
   }
   let res = parser.results[0]
-  if(res[0] != 'program')
+  if(res[0] != 'program') {
     console.dir(parser.results, { depth: null })
     throw 'Something\'s really wrong here...'
+  }
   res = res[1]
   if(res) {
     res.forEach((instr, i) => {
