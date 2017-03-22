@@ -20,10 +20,13 @@ function compile(code) {
     throw e // TODO: show more info here
   }
 
-  if(parser.results.length > 1)
+  if(parser.results.length > 1) {
+    console.dir(parser.results, { depth: null })
     throw 'Ambigious grammar'
+  }
   let res = parser.results[0]
   if(res[0] != 'program')
+    console.dir(parser.results, { depth: null })
     throw 'Something\'s really wrong here...'
   res = res[1]
   if(res) {
