@@ -1,9 +1,9 @@
-mem  01       # initialise single "bit" of data
-snum 00       # push snum with value 0 to stack
+mem  1        # initialise single "bit" of data
+snum 0        # push snum with value 0 to stack
 loop:         # label "loop"
-  putr 00     # push top of stack to first bit, without removing
+  putr 0      # push top of stack to first bit, without removing
   snum.print  # print and remove top of stack as snum
-  get  00     # push first bit to stack
-  snum 01     # push snum with value 1 to stack
+  get  0      # push first bit to stack
+  snum 1      # push snum with value 1 to stack
   snum.add    # add together and remove last 2 values of stack and add sum to stack
   jmpl loop   # jump to label "loop"
