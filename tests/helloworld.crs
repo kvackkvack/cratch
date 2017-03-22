@@ -1,2 +1,2 @@
-sstr "Hello, world!"
-sstr.print
+sstr "Hello, world!" # push sstr with value "Hello, world!" to stack
+sstr.print           # print and remove top of stack as sstr

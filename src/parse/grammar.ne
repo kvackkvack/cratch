@@ -18,10 +18,12 @@ Program -> statement_list {% r => ['program', r[0]] %}
 statement_list -> _ Statement _ {% r => [r[1]] %}
                 | _ Statement [\r\n]:+ statement_list {% r => [r[1], ...r[3]] %}
 
-Statement -> Label {% r => ['label', ...r[0]] %}
+Statement -> _statement (_ Comment):? {% id %}
+           | Comment {% r => null %}
+_statement -> Label {% r => ['label', ...r[0]] %}
            | Identifier {% r => ['call', r[0], null] %}
-           | Identifier [ \t\v\f]:+ Value {% r => ['call', r[0], r[2][0]] %}
-Identifier -> [^:\s\d"'`]:+ {% r => ['ident', r[0].join('')] %}
+           | Identifier ProgramWS Value {% r => ['call', r[0], r[2][0]] %}
+Identifier -> [^:\s\d#"'`]:+ {% r => ['ident', r[0].join('')] %}
 Label -> Identifier ":"
 
 Value -> String
@@ -39,3 +41,12 @@ Number -> _number {% r => ['number', parsenum(r[0], 10)] %}
 _number -> Integer {% id %}| Float {% id %}
 Float -> Integer:? "." Integer {% r => `${r[0]}${r[1]}${r[2]}` %}
 Integer -> [\d]:+ {% r => r[0].join('') %}
+
+Comment -> SLComment | MLComment
+SLComment -> "#" [^\r\n:] [^\r\n]:* {% r => r[1] + r[2] %}
+           | "#" {% r => null %}
+MLComment -> "#:" _mlchar:* ":#"
+_mlchar -> [^:]
+         | ":" [^#]
+
+ProgramWS -> ([ \t\v\f] | MLComment):+
