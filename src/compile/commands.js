@@ -123,6 +123,35 @@ commands = {
   // jumps
   'jmpl': (label, labels) => [
     block.variable.set('EXE PTR', labels[label] - 1)
+  ],
+  
+  'jlnz': (label, labels) => [
+    ...pop('returns', 'R1'),
+    block.ifthen(
+      block.not(block.equal(block.variable.get('R1'), 0)),
+      [ block.variable.set('EXE PTR', labels[label] - 1) ]
+    )
+  ],
+  'jlz': (label, labels) => [
+    ...pop('returns', 'R1'),
+    block.ifthen(
+      block.equal(block.variable.get('R1'), 0),
+      [ block.variable.set('EXE PTR', labels[label] - 1) ]
+    )
+  ],
+  'jgz': (label, labels) => [
+    ...pop('returns', 'R1'),
+    block.ifthen(
+      block.gt(block.variable.get('R1'), 0),
+      [ block.variable.set('EXE PTR', labels[label] - 1) ]
+    )
+  ],
+  'jlz': (label, labels) => [
+    ...pop('returns', 'R1'),
+    block.ifthen(
+      block.lt(block.variable.get('R1'), 0),
+      [ block.variable.set('EXE PTR', labels[label] - 1) ]
+    )
   ]
 }
 
