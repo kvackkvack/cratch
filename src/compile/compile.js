@@ -28,20 +28,25 @@ function compile(code) {
     console.dir(parser.results, { depth: null })
     throw 'Something\'s really wrong here...'
   }
-  res = res[1]
+  res = res[1].filter(x => x)
   if(res) {
     res.forEach((instr, i) => {
       if(instr[0] == 'label') {
         labels[instr[1][1]] = i
       } else {
-        let cmd = commands[instr[1][1]](instr[2] ? instr[2][1] : null, labels)
-        blocks.push(cmd)
-        cmd.forEach((block) => {
-          if(block[0] instanceof Array) {
-            depends.push(block[0][1][0])
-          }
-        })
+        blocks.push(instr.slice(1))
       }
+    })
+    blocks.forEach((block, i) => {
+      let cmd = commands[block[0][1]](block[1] ? block[1][1] : null, labels)
+      cmd.forEach((part) => {
+        if(part[0] instanceof Array) {
+          let depend = part[0][1][0]
+          if(!(depend in depends))
+            depends.push(depend)
+        }
+      })
+      blocks[i] = cmd
     })
   }
 
