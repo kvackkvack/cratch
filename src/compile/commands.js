@@ -124,7 +124,7 @@ commands = {
   'jmpl': (label, labels) => [
     block.variable.set('EXE PTR', labels[label] - 1)
   ],
-  
+
   'jlnz': (label, labels) => [
     ...pop('returns', 'R1'),
     block.ifthen(
@@ -139,19 +139,24 @@ commands = {
       [ block.variable.set('EXE PTR', labels[label] - 1) ]
     )
   ],
-  'jgz': (label, labels) => [
+  'jgtz': (label, labels) => [
     ...pop('returns', 'R1'),
     block.ifthen(
       block.gt(block.variable.get('R1'), 0),
       [ block.variable.set('EXE PTR', labels[label] - 1) ]
     )
   ],
-  'jlz': (label, labels) => [
+  'jltz': (label, labels) => [
     ...pop('returns', 'R1'),
     block.ifthen(
       block.lt(block.variable.get('R1'), 0),
       [ block.variable.set('EXE PTR', labels[label] - 1) ]
     )
+  ],
+
+  // input
+  'input': () => [
+    block.custom.call([ 'Minput' ])
   ]
 }
 

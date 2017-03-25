@@ -1,0 +1,24 @@
+# prints all chars of inputted string
+
+mem  3
+snum 0
+put  1
+input
+putr 0
+sstr.len
+put  2
+
+loop:
+  get  0
+  get  1
+  sstr.char
+  sstr.print
+  snum 1
+  get  1
+  snum.add
+  putr 1
+  get  2
+  snum.lt
+  jlz  loop-end
+  jmpl loop
+loop-end:
