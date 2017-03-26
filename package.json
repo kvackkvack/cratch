@@ -1,15 +1,16 @@
 {
   "name": "cratch",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Assembly-like language that compiles to Scratch by MIT.",
-  "main": "src/index.js",
+  "main": "src/compile/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "kvackkvack",
   "license": "MIT",
   "dependencies": {
+    "nearley": "^2.8.0",
     "node-zip": "^1.1.1",
-    "nearley": "^2.8.0"
+    "python-shell": "^0.4.0"
   }
 }
